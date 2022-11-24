@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap');
+
+:root {
+    --purple: #8461F1;
+    --light-purple: #B9A7DC;
+    --green: #66BAA7;
+    --light-gray: rgba(0, 0, 0, 0.3);
+    --gray: rgba(0, 0, 0, 0.5);
+    font-size: 15px;
+}
+
+* {
+    font-family: 'Inter', sans-serif;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    background: none;
+    box-sizing: border-box;
+}
+
+a, button  {
+    cursor: pointer;
+    transition: all ease-in-out 400ms;
+}
+a:hover , button:hover {
+    transform: scale(1.1);
+}
+body {
+    min-height: 100vh;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--purple);
+    padding: 2rem 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0 1.5rem 1.5rem 0;
+    box-shadow: 0 0 25px 5px rgba(0, 0, 0, 0.15);
+}
+
+#navbar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 60%;
+}
+
+#main {
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 2rem;
+    width: 100%;
+}
+
+#form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-shadow: 0 0 25px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 1.5rem;
+    overflow: clip;
+}
+
+form {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input-group {
+    position: relative;
+}
+
+[type="text"], [type="date"], select {
+    border: 1px solid var(--light-gray);
+    height: 3rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    padding: 0 1rem;
+    font-size: 1rem;
+}
+
+[type="text"]:focus, [type="date"]:focus, select:focus {
+    border: 1px solid var(--purple);
+    height: 3rem;
+    border-radius: 0.5rem;
+    width: 100%;
+}
+
+[type="text"]:focus + label {
+    top: -30%;
+    bottom: 10px;
+    left: 0.5rem;
+    scale: 0.8;
+    opacity: 1;
+    padding: 0 0.5rem;
+    background-color: #FFFFFF;
+    color: var(--purple);
+    height: fit-content;
+}
+
+select, [type="date"] {
+    color: var(--light-purple);
+}
+
+label {
+    position: absolute;
+    left: 1rem;
+    top: 0.8rem;
+    transition: 0.2s ease all;
+    color: var(--light-purple)
+}
+
+.title {
+    background-color: var(--purple);
+    padding: 1rem 1.5rem;
+    font-size: 1.7rem;
+    color: #ffff;
+}
+
+.double-inputs {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.input-group {
+    width: 100%;
+}
+.primary-btn {
+    background-color: var(--green);
+    padding: 0.5rem 1rem;
+    width: fit-content;
+    color: #FFFFFF;}

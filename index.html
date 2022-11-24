@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>Cosmetics Solicode</title>
+</head>
+<body>
+<main>
+    <nav>
+        <div id="logo">
+            <img src="/icons/logo.svg" alt="logo">
+        </div>
+        <div id="navbar">
+            <a class="link"><img src="/icons/home.svg"></a>
+            <a class="link"><img src="/icons/shop.svg"></a>
+            <a class="link"><img src="/icons/bag.svg"></a>
+            <a class="link"><img src="/icons/people.svg"></a>
+            <a class="link"><img src="/icons/statusup.svg"></a>
+            <a class="link"><img src="/icons/setting2.svg"></a>
+        </div>
+        <button class="expand">
+            <img src="/icons/arrowcircleright.svg">
+        </button>
+    </nav>
+    <div id="main">
+        <div id="form">
+            <h1 class="title">Product Infos</h1>
+            <form action="">
+                <div class="double-inputs">
+                    <div class="input-group">
+                        <input type="text" name="product-name" id="product-name">
+                        <label for="product-name">Product Name</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" name="brand" id="brand">
+                        <label for="brand">Brand</label>
+                    </div>
+                </div>
+                <div class="double-inputs">
+                    <div class="input-group">
+                        <input type="text" name="price" id="price">
+                        <label for="price">Price</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="date" name="date" id="date">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <select name="category" id="">
+                        <option value="0">Category</option>
+                    </select>
+                </div>
+                <div class="input-radio-group">
+                    <p id="radio-label"></p>
+                    <input type="radio" name="sale" id="on-sale" value="no">
+                    <input type="radio" name="sale" id="not-on-sale" value="yes">
+                </div>
+                <button class="primary-btn" >Add</button>
+            </form>
+        </div>
+        <div class="table">
+            <div class="row">
+                <div class="column">Product Name</div>
+                <div class="column">Brand</div>
+                <div class="column">Price</div>
+                <div class="column">Date</div>
+                <div class="column">Category</div>
+                <div class="column">Sale</div>
+                <div class="column">Action</div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vuesax@4.0.1-alpha.16/dist/vuesax.min.js"></script>
+</body>
+</html>
