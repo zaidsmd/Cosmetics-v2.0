@@ -6,7 +6,22 @@
     --green: #66BAA7;
     --light-gray: rgba(0, 0, 0, 0.3);
     --gray: rgba(0, 0, 0, 0.5);
+    --lighter-purple: #F8EBFF;
     font-size: 15px;
+}
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--light-purple);
+    border-radius: 100px;
 }
 
 * {
@@ -20,15 +35,22 @@
     box-sizing: border-box;
 }
 
-a, button  {
+a, button {
     cursor: pointer;
     transition: all ease-in-out 400ms;
 }
-a:hover , button:hover {
+
+nav a img {
+    scale: 0.9;
+}
+
+nav a:hover, nav button:hover {
     transform: scale(1.1);
 }
+
 body {
-    min-height: 100vh;
+    max-width: 100vw;
+    overflow-y: scroll;
 }
 
 main {
@@ -46,6 +68,9 @@ nav {
     justify-content: space-between;
     border-radius: 0 1.5rem 1.5rem 0;
     box-shadow: 0 0 25px 5px rgba(0, 0, 0, 0.15);
+    max-height: 100vh;
+    position: sticky;
+    top: 0;
 }
 
 #navbar {
@@ -60,6 +85,7 @@ nav {
     flex-direction: column;
     padding: 3rem 2rem;
     width: 100%;
+    gap: 2rem;
 }
 
 #form {
@@ -69,6 +95,8 @@ nav {
     box-shadow: 0 0 25px 5px rgba(0, 0, 0, 0.15);
     border-radius: 1.5rem;
     overflow: clip;
+    height: fit-content;
+    min-height: 27rem;
 }
 
 form {
@@ -82,7 +110,7 @@ form {
     position: relative;
 }
 
-[type="text"], [type="date"], select {
+[type="text"], [type="date"], [type="number"], select {
     border: 1px solid var(--light-gray);
     height: 3rem;
     border-radius: 0.5rem;
@@ -91,14 +119,15 @@ form {
     font-size: 1rem;
 }
 
-[type="text"]:focus, [type="date"]:focus, select:focus {
+input:not([type="radio"]):focus, select:focus {
     border: 1px solid var(--purple);
     height: 3rem;
     border-radius: 0.5rem;
     width: 100%;
 }
 
-[type="text"]:focus + label {
+[type="text"]:focus + label ,[type="number"]:focus + label
+,[type="text"]:not([value='']) + label ,[type="number"]:not([value='']) + label{
     top: -30%;
     bottom: 10px;
     left: 0.5rem;
@@ -114,9 +143,9 @@ select, [type="date"] {
     color: var(--light-purple);
 }
 
-label {
+.input-group label {
     position: absolute;
-    left: 1rem;
+    left: 1.5rem;
     top: 0.8rem;
     transition: 0.2s ease all;
     color: var(--light-purple)
@@ -124,8 +153,8 @@ label {
 
 .title {
     background-color: var(--purple);
-    padding: 1rem 1.5rem;
-    font-size: 1.7rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 1.5rem;
     color: #ffff;
 }
 
@@ -138,8 +167,104 @@ label {
 .input-group {
     width: 100%;
 }
+
 .primary-btn {
     background-color: var(--green);
-    padding: 0.5rem 1rem;
+    padding: 0.7rem 1.7rem;
     width: fit-content;
-    color: #FFFFFF;}
+    color: #FFFFFF;
+    border-radius: 0.5rem;
+    transition: all ease-in-out 400ms;
+}
+
+.primary-btn:hover {
+    filter: saturate(150%);
+    padding: 0.7rem 2rem;
+}
+
+.input-radio-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 20% 0 1.3rem;
+    /*border: 1px solid var(--light-gray);*/
+    height: 3rem;
+    align-items: center;
+    border-radius: 0.5rem;
+    color: var(--light-purple);
+}
+
+[type="radio"] {
+    border: 2px;
+    width: 1.1rem;
+    height: 1.1rem;
+}
+
+label:has([type="radio"]) {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1.5rem;
+    border: 1px solid var(--light-gray);
+    border-radius: 0.5rem;
+    color: var(--light-purple);
+    accent-color: var(--purple);
+}
+
+label:has([type="radio"]:checked) {
+    color: white;
+    background-color: var(--purple);
+    border: none;
+}
+
+#form-button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/*/////////////////////////////*/
+.table {
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 25px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 1.5rem;
+    min-height: 28rem;
+    overflow-x: scroll;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.row:first-child {
+    background-color: var(--purple) !important;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+.row:nth-child(odd) {
+    background-color: var(--lighter-purple);
+}
+
+.column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3.5rem;
+    width: 100%;
+    min-width: 10rem;
+}
+
+.column:nth-child(3), .column:nth-child(6) {
+    min-width: 5rem;
+    max-width: 7rem;
+}
+
+.column:not(:last-child) {
+    border-right: 1px solid var(--light-gray);
+}

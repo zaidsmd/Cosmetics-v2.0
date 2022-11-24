@@ -32,34 +32,47 @@
             <form action="">
                 <div class="double-inputs">
                     <div class="input-group">
-                        <input type="text" name="product-name" id="product-name">
+                        <input onkeyup="this.setAttribute('value',this.value);" type="text" name="product-name" id="product-name">
                         <label for="product-name">Product Name</label>
                     </div>
                     <div class="input-group">
-                        <input type="text" name="brand" id="brand">
+                        <input onkeyup="this.setAttribute('value',this.value);" type="text" name="brand" id="brand">
                         <label for="brand">Brand</label>
                     </div>
                 </div>
                 <div class="double-inputs">
                     <div class="input-group">
-                        <input type="text" name="price" id="price">
+                        <input onkeyup="this.setAttribute('value',this.value);" type="number" name="price" id="price">
                         <label for="price">Price</label>
                     </div>
                     <div class="input-group">
-                        <input type="date" name="date" id="date">
+                        <input onkeyup="this.setAttribute('value',this.value);" type="date" name="date" id="date">
                     </div>
                 </div>
                 <div class="input-group">
-                    <select name="category" id="">
+                    <select name="category">
                         <option value="0">Category</option>
                     </select>
                 </div>
                 <div class="input-radio-group">
-                    <p id="radio-label"></p>
-                    <input type="radio" name="sale" id="on-sale" value="no">
-                    <input type="radio" name="sale" id="not-on-sale" value="yes">
+                    <p id="radio-label">On Sale:</p>
+                    <div class="radio-group">
+                        <label for="on-sale">
+                            <span>Yes</span>
+                            <input type="radio" name="sale" id="on-sale" value="no">
+                        </label>
+                    </div>
+                    <div class="radio-group">
+                        <label for="not-on-sale">
+                            <span>No</span>
+                            <input type="radio" name="sale" id="not-on-sale" value="yes">
+                        </label>
+
+                    </div>
                 </div>
-                <button class="primary-btn" >Add</button>
+                <div id="form-button">
+                    <button class="primary-btn">Add</button>
+                </div>
             </form>
         </div>
         <div class="table">
@@ -75,7 +88,5 @@
         </div>
     </div>
 </main>
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vuesax@4.0.1-alpha.16/dist/vuesax.min.js"></script>
 </body>
 </html>
