@@ -32,26 +32,27 @@
             <form action="">
                 <div class="double-inputs">
                     <div class="input-group">
-                        <input onkeyup="this.setAttribute('value',this.value);" type="text" name="product-name" id="product-name">
+                        <input onkeyup="this.setAttribute('value',this.value);" value='' type="text" name="product-name" id="product-name">
                         <label for="product-name">Product Name</label>
                     </div>
                     <div class="input-group">
-                        <input onkeyup="this.setAttribute('value',this.value);" type="text" name="brand" id="brand">
+                        <input onkeyup="this.setAttribute('value',this.value);" type="text" value='' name="brand" id="brand">
                         <label for="brand">Brand</label>
                     </div>
                 </div>
                 <div class="double-inputs">
                     <div class="input-group">
-                        <input onkeyup="this.setAttribute('value',this.value);" type="number" name="price" id="price">
+                        <input onkeyup="this.setAttribute('value',this.value);"  value='' type="number" name="price" id="price">
                         <label for="price">Price</label>
                     </div>
                     <div class="input-group">
-                        <input onkeyup="this.setAttribute('value',this.value);" type="date" name="date" id="date">
+                        <input  value='' type="date" name="date" id="date">
                     </div>
                 </div>
                 <div class="input-group">
                     <select name="category">
-                        <option value="0">Category</option>
+                        <option  value="0">Category</option>
+                        <option value="1">any</option>
                     </select>
                 </div>
                 <div class="input-radio-group">
@@ -71,11 +72,11 @@
                     </div>
                 </div>
                 <div id="form-button">
-                    <button class="primary-btn">Add</button>
+                    <button id="add" type="button" class="primary-btn">Add</button>
                 </div>
             </form>
         </div>
-        <div class="table">
+        <div id="table">
             <div class="row">
                 <div class="column">Product Name</div>
                 <div class="column">Brand</div>
@@ -86,7 +87,15 @@
                 <div class="column">Action</div>
             </div>
         </div>
+        <dialog id="modal">
+            <div id="purple" ></div>
+            <p>Are you Sure you want to delete the product ? </p>
+           <div> <button class="secondary-btn" >Delete</button>
+               <button class="primary-btn" >Cancel</button>
+           </div>
+        </dialog>
     </div>
 </main>
+<script src="script.js"></script>
 </body>
 </html>
