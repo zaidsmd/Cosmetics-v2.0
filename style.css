@@ -215,7 +215,7 @@ select, [type="date"] {
     height: 1.1rem;
 }
 
-label:has([type="radio"]) {
+.forRadio {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
