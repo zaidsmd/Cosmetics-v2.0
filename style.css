@@ -290,11 +290,12 @@ label:has([type="radio"]:checked) {
     display: flex;
     gap: 1rem;
 }
-
+#update {
+    display: none;
+}
 /*//////////////////////////////////*/
 
 #modal {
-    /*display: flex;*/
     flex-direction: column;
     gap: 1rem;
     padding: 3.3rem 1.5rem 2rem 1.5rem;
