@@ -124,7 +124,7 @@ document.getElementById('modal-delete').addEventListener('click', () => {
 document.getElementById('cancel').addEventListener('click',()=>{
     document.querySelector('dialog').close();
 })
-function validateInput(element){
+function validateInput(){
     inputs.forEach(element => {
         if (element.name === 'product-name') {
             if (element.value === '' && element.value.length<=30 ) {
