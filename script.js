@@ -25,7 +25,7 @@ add.addEventListener('click', () => {
             let deleteBtn = document.createElement('button');
             deleteBtn.innerHTML = 'Delete';
             deleteBtn.classList.add('secondary-btn');
-            deleteBtn.classList.add('delete') ;
+            deleteBtn.classList.add('delete');
             let lastColumn = document.createElement('div');
             lastColumn.classList.add('column');
             lastColumn.appendChild(deleteBtn);
@@ -105,7 +105,7 @@ add.addEventListener('click', () => {
 
                     })
                 })
-                document.querySelectorAll('.delete').forEach(e=>{
+                document.querySelectorAll('.delete').forEach(e => {
                     e.addEventListener('click', function (e) {
                         document.querySelector('dialog').showModal();
                         toDelete = e.target.parentElement.parentElement;
@@ -121,13 +121,14 @@ document.getElementById('modal-delete').addEventListener('click', () => {
     toDelete.remove();
     document.querySelector('dialog').close();
 })
-document.getElementById('cancel').addEventListener('click',()=>{
+document.getElementById('cancel').addEventListener('click', () => {
     document.querySelector('dialog').close();
 })
-function validateInput(){
+
+function validateInput() {
     inputs.forEach(element => {
         if (element.name === 'product-name') {
-            if (element.value === '' && element.value.length<=30 ) {
+            if (element.value === '' && element.value.length <= 30) {
                 nameKey = false;
                 element.classList.remove('valid')
                 element.classList.add('invalid')
@@ -160,7 +161,7 @@ function validateInput(){
             }
         }
         if (element.name === 'price') {
-            if (element.value === '' || Number(element.value) < 0){
+            if (element.value === '' || Number(element.value) < 0) {
                 priceKey = false;
                 element.classList.remove('valid');
                 element.classList.add('invalid');
@@ -171,12 +172,12 @@ function validateInput(){
             }
         }
     })
-    if (select.value==='0'){
+    if (select.value === '0') {
         selectKey = false;
         select.classList.add('invalid');
         select.classList.remove('valid');
-    }else {
-        selectKey= true;
+    } else {
+        selectKey = true;
         select.classList.remove('invalid');
         select.classList.add('valid');
     }
