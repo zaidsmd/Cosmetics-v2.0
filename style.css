@@ -289,9 +289,18 @@ label:has([type="radio"]:checked) {
 .column:last-child {
     display: flex;
     gap: 1rem;
+    padding: 0.5rem;
 }
 #update {
     display: none;
+}
+.modify {
+    width: 100%;
+    padding: 0.5rem 0 !important;
+}
+.delete {
+    width: 100% !important;
+    padding: 0.5rem 0 !important;
 }
 /*//////////////////////////////////*/
 
@@ -325,4 +334,52 @@ label:has([type="radio"]:checked) {
 .invalid,.invalid + label {
     border-color: red !important;
     color: red !important;
+}
+#navbar span {
+    display: none;
+}
+/*//////////////////////////////////*/
+@media only screen and (max-width: 1024px) {
+    :root {
+        font-size:14px ;
+    }
+}
+@media only screen and (max-width: 980px) {
+    :root {
+        font-size:12px ;
+    }
+    nav  img {
+        scale: 0.8 !important;
+    }
+
+    nav>button img {
+        scale: 85%;
+    }
+}
+@media only screen and (max-width: 850px){
+    main{
+        flex-direction: column-reverse;
+    }
+    nav {
+       flex-direction: row;
+        border-radius: 1.5rem 1.5rem 0 0;
+        padding: 0.5rem 2rem;
+        position: sticky;
+        bottom: 0;
+    }
+    #navbar {
+        flex-direction: row;
+        height: fit-content;
+        width: 100%;
+        align-items: center;
+    }
+    nav button{
+        display: none;
+    }
+    #logo {
+        display: none;
+    }
+    .row {
+        width: fit-content !important;
+    }
 }
