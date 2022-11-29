@@ -160,7 +160,7 @@ function validateInput(){
             }
         }
         if (element.name === 'price') {
-            if (element.value === '') {
+            if (element.value === '' || Number(element.value) < 0){
                 priceKey = false;
                 element.classList.remove('valid');
                 element.classList.add('invalid');
@@ -176,7 +176,7 @@ function validateInput(){
         select.classList.add('invalid');
         select.classList.remove('valid');
     }else {
-        selectKey= false;
+        selectKey= true;
         select.classList.remove('invalid');
         select.classList.add('valid');
     }
