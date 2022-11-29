@@ -4,47 +4,9 @@ let select = document.querySelector('select');
 let add = document.getElementById('add');
 let table = document.getElementById('table');
 let dataToModify = [];
-var toDelete;
+let toDelete;
 add.addEventListener('click', () => {
-    inputs.forEach(element => {
-        if (element.name === 'product-name') {
-            if (element.value === '') {
-                nameKey = false;
-                element.classList.remove('valid')
-            } else {
-                element.classList.add('valid')
-                nameKey = true;
-            }
-        }
-        if (element.name === 'brand') {
-            if (element.value === '') {
-                brandKey = false;
-                element.classList.remove('valid')
-            } else {
-                element.classList.add('valid')
-                brandKey = true;
-            }
-        }
-        if (element.name === 'date') {
-            if (element.value === '') {
-                dateKey = false;
-                element.classList.remove('valid')
-            } else {
-                element.classList.add('valid')
-                dateKey = true;
-            }
-        }
-        if (element.name === 'price') {
-            if (element.value === '') {
-                priceKey = false;
-                element.classList.remove('valid')
-            } else {
-                element.classList.add('valid')
-                priceKey = true;
-            }
-        }
-    })
-    selectKey = select.value !== '0';
+    validateInput();
     if (document.querySelector('input:checked') === null) {
     } else {
         if (selectKey && dateKey && nameKey && brandKey && priceKey) {
@@ -114,26 +76,33 @@ add.addEventListener('click', () => {
                     add.style.display = 'none';
                     document.getElementById('update').style.display = 'block';
                     document.getElementById('update').addEventListener('click', function () {
-                        productName = document.querySelector("[name='product-name']").value.trim();
-                        brand = document.querySelector("[name='brand']").value.trim();
-                        price = '$ ' + Number(document.querySelector('[name=price]').value).toFixed(2);
-                        date = document.querySelector('[name=date]').value.trim();
-                        category = document.querySelector('option:checked').innerHTML.trim();
-                        sale = document.querySelector('[type="radio"]:checked ').value;
-                        let updatedData = [productName, brand, price, date, category, sale]
-                        updatedData.forEach((e, i) => {
-                            selectedRow[i].innerHTML = e;
-                        })
-                        add.style.display = 'block';
-                        document.getElementById('update').style.display = 'none'
-                        document.querySelector('form').reset()
-                        inputs.forEach(e => {
-                            e.value = '';
-                            e.setAttribute('value', '')
-                            e.classList.remove('valid')
-                        })
-                        document.querySelector('[type=radio]:checked').removeAttribute('checked')
-                        document.querySelector('select').classList.remove('valid');
+                        validateInput();
+                        if (document.querySelector('input:checked') === null) {
+                        } else {
+                            if (selectKey && dateKey && nameKey && brandKey && priceKey) {
+                                productName = document.querySelector("[name='product-name']").value.trim();
+                                brand = document.querySelector("[name='brand']").value.trim();
+                                price = '$ ' + Number(document.querySelector('[name=price]').value).toFixed(2);
+                                date = document.querySelector('[name=date]').value.trim();
+                                category = document.querySelector('option:checked').innerHTML.trim();
+                                sale = document.querySelector('[type="radio"]:checked ').value;
+                                let updatedData = [productName, brand, price, date, category, sale]
+                                updatedData.forEach((e, i) => {
+                                    selectedRow[i].innerHTML = e;
+                                })
+                                add.style.display = 'block';
+                                document.getElementById('update').style.display = 'none'
+                                document.querySelector('form').reset()
+                                inputs.forEach(e => {
+                                    e.value = '';
+                                    e.setAttribute('value', '')
+                                    e.classList.remove('valid')
+                                })
+                                document.querySelector('[type=radio]:checked').removeAttribute('checked')
+                                document.querySelector('select').classList.remove('valid');
+                            }
+                        }
+
                     })
                 })
                 document.querySelectorAll('.delete').forEach(e=>{
@@ -155,3 +124,60 @@ document.getElementById('modal-delete').addEventListener('click', () => {
 document.getElementById('cancel').addEventListener('click',()=>{
     document.querySelector('dialog').close();
 })
+function validateInput(element){
+    inputs.forEach(element => {
+        if (element.name === 'product-name') {
+            if (element.value === '' && element.value.length<=30 ) {
+                nameKey = false;
+                element.classList.remove('valid')
+                element.classList.add('invalid')
+            } else {
+                element.classList.remove('invalid')
+                element.classList.add('valid')
+                nameKey = true;
+            }
+        }
+        if (element.name === 'brand') {
+            if (element.value === '') {
+                brandKey = false;
+                element.classList.remove('valid')
+                element.classList.add('invalid')
+            } else {
+                element.classList.add('valid')
+                element.classList.remove('invalid')
+                brandKey = true;
+            }
+        }
+        if (element.name === 'date') {
+            if (element.value === '') {
+                dateKey = false;
+                element.classList.remove('valid');
+                element.classList.add('invalid');
+            } else {
+                element.classList.add('valid');
+                element.classList.remove('invalid');
+                dateKey = true;
+            }
+        }
+        if (element.name === 'price') {
+            if (element.value === '') {
+                priceKey = false;
+                element.classList.remove('valid');
+                element.classList.add('invalid');
+            } else {
+                element.classList.add('valid');
+                element.classList.remove('invalid');
+                priceKey = true;
+            }
+        }
+    })
+    if (select.value==='0'){
+        selectKey = false;
+        select.classList.add('invalid');
+        select.classList.remove('valid');
+    }else {
+        selectKey= false;
+        select.classList.remove('invalid');
+        select.classList.add('valid');
+    }
+}

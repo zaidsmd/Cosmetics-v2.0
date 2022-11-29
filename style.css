@@ -322,3 +322,7 @@ label:has([type="radio"]:checked) {
 .valid, .valid + label {
     border-color: green !important;
 }
+.invalid,.invalid + label {
+    border-color: red !important;
+    color: red !important;
+}
