@@ -5,6 +5,7 @@ let add = document.getElementById('add');
 let table = document.getElementById('table');
 let dataToModify = [];
 let toDelete;
+let selectedRow;
 add.addEventListener('click', () => {
     validateInput();
     if (document.querySelector('input:checked') === null) {
@@ -50,7 +51,12 @@ add.addEventListener('click', () => {
             document.querySelector('[type=radio]')
             document.querySelectorAll('.modify').forEach(e => {
                 e.addEventListener('click', () => {
-                    let selectedRow = Object.values(e.parentElement.parentElement.children);
+                    dataToModify = [];
+                    document.querySelector('form').reset()
+                    inputs.forEach(function () {
+                        e.value = ''
+                    })
+                    selectedRow = Object.values(e.parentElement.parentElement.children);
                     selectedRow.forEach((element, index) => {
                         if (index === 2) {
                             dataToModify.push(Number(element.innerHTML.replace(/^\D+/g, '').trim()))
@@ -64,7 +70,6 @@ add.addEventListener('click', () => {
                         }
                     })
                     document.querySelector(`select`).value = dataToModify[4];
-                    console.log(dataToModify[5])
                     if (dataToModify[5] === 'Yes') {
                         document.getElementById('on-sale').setAttribute('checked', '');
                     } else {
