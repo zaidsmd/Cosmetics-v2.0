@@ -257,14 +257,14 @@ label:has([type="radio"]:checked) {
     width: 100%;
 }
 
-.row:first-child {
+#table> .row:first-child {
     background-color: var(--purple) !important;
     font-weight: 600;
     font-size: 1.2rem;
     color: #ffffff;
 }
 
-.row:nth-child(odd) {
+#details .row:nth-child(odd) {
     background-color: var(--lighter-purple);
 }
 
@@ -291,20 +291,24 @@ label:has([type="radio"]:checked) {
     gap: 1rem;
     padding: 0.5rem;
 }
+
 #update {
     display: none;
 }
+
 .modify {
     width: 100%;
     padding: 0.5rem 0 !important;
 }
+
 .delete {
     width: 100% !important;
     padding: 0.5rem 0 !important;
 }
+
 /*//////////////////////////////////*/
 
-#remove-modal {
+#remove-modal , #add-modal {
     padding: 3.3rem 1.5rem 2rem 1.5rem;
     background-color: #FFFFFF;
     box-shadow: 0 0 25px 5px rgba(0, 0, 0, 0.15);
@@ -314,9 +318,6 @@ label:has([type="radio"]:checked) {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-#remove-modal :not(:first-child) {
-    margin-top: 0.5rem;
 }
 
 .purple {
@@ -331,54 +332,65 @@ label:has([type="radio"]:checked) {
 .valid, .valid + label {
     border-color: green !important;
 }
-.invalid,.invalid + label {
+
+.invalid, .invalid + label {
     border-color: red !important;
     color: red !important;
 }
+
 #navbar span {
     display: none;
 }
+
 /*//////////////////////////////////*/
 @media only screen and (max-width: 1024px) {
     :root {
-        font-size:14px ;
+        font-size: 14px;
     }
 }
+
 @media only screen and (max-width: 980px) {
     :root {
-        font-size:12px ;
+        font-size: 12px;
     }
-    nav  img {
+
+    nav img {
         scale: 0.8 !important;
     }
 
-    nav>button img {
+    nav > button img {
         scale: 85%;
     }
 }
-@media only screen and (max-width: 850px){
-    main{
+
+@media only screen and (max-width: 850px) {
+    main {
         flex-direction: column-reverse;
     }
+
     nav {
-       flex-direction: row;
+        flex-direction: row;
         border-radius: 1.5rem 1.5rem 0 0;
         padding: 0.5rem 2rem;
         position: sticky;
         bottom: 0;
     }
+
     #navbar {
         flex-direction: row;
         height: fit-content;
         width: 100%;
         align-items: center;
     }
-    nav button{
+
+    nav button {
         display: none;
     }
+
     #logo {
         display: none;
     }
+
     .row {
         width: fit-content !important;
     }
