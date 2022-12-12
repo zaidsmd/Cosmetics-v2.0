@@ -6,6 +6,7 @@ let category = document.getElementById('category');
 let sale = document.querySelector('[name=sale]:checked');
 let add = document.getElementById('add');
 let table = [];
+var index , indexOfModify;
 
 class Product {
     constructor(name, brand, price, date, category, sale) {
@@ -18,7 +19,7 @@ class Product {
     }
 
     details() {
-        return `<p>Product Details</p>
+        return `
                 <p>Name: ${this.name}</p>
                 <p>Brand: ${this.brand}</p>
                 <p>Price: ${this.price}</p>
@@ -33,6 +34,11 @@ if (window.localStorage.table === undefined) {
 } else if (window.localStorage.table !== '') {
     table = JSON.parse(window.localStorage.table);
     tableCreating(table);
+    document.querySelectorAll('.delete').forEach(button=>{
+        button.addEventListener('click',event=>{
+            deleteFromTable();
+        })
+    })
 }
 
 function validation() {
@@ -120,7 +126,56 @@ function tableCreating(arrayOfObjects) {
         })
         row.appendChild(lastColumn);
         document.querySelector('#data').appendChild(row);
+        document.querySelectorAll('.modify').forEach(button=>{
+            button.addEventListener('click',e=>{
+                indexOfModify = Array.from(e.target.parentElement.parentElement.parentElement.children).indexOf(e.target.parentElement.parentElement)
+                name.value = e.target.parentElement.parentElement.children[0].innerHTML;
+                name.setAttribute('value',e.target.parentElement.parentElement.children[0].innerHTML)
+                brand.value = e.target.parentElement.parentElement.children[1].innerHTML;
+                brand.setAttribute('value',e.target.parentElement.parentElement.children[1].innerHTML)
+                price.value = parseFloat(e.target.parentElement.parentElement.children[2].innerHTML.replace(/,/g, ".")).toFixed(2)
+                price.setAttribute('value',parseFloat(e.target.parentElement.parentElement.children[2].innerHTML.replace(/,/g, ".")).toFixed(2))
+                date.value = e.target.parentElement.parentElement.children[3].innerHTML;
+                category.value = e.target.parentElement.parentElement.children[4].innerHTML;
+                if (e.target.parentElement.parentElement.children[5].innerHTML=== document.querySelector('#on-sale').value){
+                    document.querySelector('#on-sale').setAttribute('checked','');
+                }else  {
+                    document.querySelector('#not-on-sale').setAttribute('checked','');
+                }
+            })
+        })
+
     })
+}
+function formReset() {
+    document.querySelector('form').reset()
+    name.value='';
+    price.value = '';
+    brand.value ='';
+    name.classList.remove('valid');
+    brand.classList.remove('valid');
+    price.classList.remove('valid');
+    date.classList.remove('valid');
+    category.classList.remove('valid');
+    document.querySelectorAll('[name=sale]').forEach(element=>{
+        element.classList.remove('valid');
+    })
+}
+function deleteFromTable(){
+    index = Array.from(event.target.parentElement.parentElement.parentElement.children).indexOf(event.target.parentElement.parentElement);
+    document.querySelector('#modal-delete').addEventListener('click', deletButoon=>{
+        table.splice(index,1);
+        localStorage.table = JSON.stringify(table);
+        document.querySelector('#data').innerHTML=''
+        tableCreating(table);
+        document.querySelectorAll('.delete').forEach(button=>{
+            button.addEventListener('click',event=>{
+                deleteFromTable();
+            })
+        })
+        deletButoon.target.parentElement.parentElement.close();
+    })
+    document.querySelector('#remove-modal').showModal()
 }
 add.addEventListener('click', () => {
     if (validation() === true) {
@@ -148,17 +203,11 @@ add.addEventListener('click', () => {
         tableCreating(table);
         document.querySelector('#details').innerHTML = productToAdd.details();
         document.querySelector('#add-modal').showModal()
-        document.querySelector('form').reset()
-        name.value='';
-        price.value = '';
-        brand.value ='';
-        name.classList.remove('valid');
-        brand.classList.remove('valid');
-        price.classList.remove('valid');
-        date.classList.remove('valid');
-        category.classList.remove('valid');
-        document.querySelectorAll('[name=sale]').forEach(element=>{
-            element.classList.remove('valid');
+        formReset()
+        document.querySelectorAll('.delete').forEach(button=>{
+            button.addEventListener('click',event=>{
+                deleteFromTable();
+            })
         })
     } else {
 
@@ -166,8 +215,6 @@ add.addEventListener('click', () => {
 })
 document.querySelectorAll('.cancel').forEach(button=>{
     button.addEventListener('click', e=>{
-        e.target.parentElement.close()
+        e.target.parentElement.parentElement.close()
     })
 })
-
-
