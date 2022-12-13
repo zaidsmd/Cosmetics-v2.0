@@ -232,6 +232,6 @@ update.addEventListener('click',()=>{
         formReset();
         update.classList.remove('show');
         add.classList.add('show');
-        tableCreating(table)
+        tableCreating(table);
     }
 })
