@@ -180,18 +180,6 @@ function formReset() {
 }
 function deleteFromTable(){
     index = Array.from(document.querySelector('#data').children).indexOf(event.target.parentElement.parentElement);
-    console.log(index)
-    document.querySelector('#modal-delete').addEventListener('click', deleteButoon=>{
-        table.splice(index ,1);
-        localStorage.table = JSON.stringify(table);
-        tableCreating(table);
-        document.querySelectorAll('.delete').forEach(button=>{
-            button.addEventListener('click',event=>{
-                deleteFromTable();
-            })
-        })
-        deleteButoon.target.parentElement.parentElement.close();
-    })
     document.querySelector('#remove-modal').showModal()
 }
 add.addEventListener('click', () => {
@@ -234,4 +222,10 @@ update.addEventListener('click',()=>{
         add.classList.add('show');
         tableCreating(table);
     }
+})
+document.querySelector('#modal-delete').addEventListener('click', deleteButoon=>{
+    table.splice(index ,1);
+    localStorage.table = JSON.stringify(table);
+    tableCreating(table);
+    deleteButoon.target.parentElement.parentElement.close();
 })
