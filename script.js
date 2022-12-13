@@ -7,10 +7,10 @@ let sale = document.querySelector('[name=sale]:checked');
 let add = document.getElementById('add');
 let update = document.getElementById('update');
 let table = [];
-var index , indexOfModify;
+let index , indexOfModify;
 let inputs = document.querySelectorAll("input:not([type=radio],select)");
 
-class Product {
+class Article {
     constructor(name, brand, price, date, category, sale) {
         this.name = name;
         this.brand = brand;
@@ -202,7 +202,7 @@ add.addEventListener('click', () => {
         let dateValue = date.value.trim();
         let categoryValue = category.value;
         let saleValue = document.querySelector('[name=sale]:checked').value;
-        let productToAdd = new Product(nameValue,brandValue,priceValue,dateValue,categoryValue,saleValue)
+        let productToAdd = new Article(nameValue,brandValue,priceValue,dateValue,categoryValue,saleValue)
         table.push(productToAdd);
         window.localStorage.table = JSON.stringify(table);
         tableCreating(table);
