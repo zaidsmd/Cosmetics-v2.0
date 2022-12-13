@@ -305,7 +305,15 @@ label:has([type="radio"]:checked) {
     width: 100% !important;
     padding: 0.5rem 0 !important;
 }
-
+#add {
+    display: none;
+}
+#update {
+    display: none;
+}
+.show {
+    display: block !important;
+}
 /*//////////////////////////////////*/
 
 #remove-modal , #add-modal {

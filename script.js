@@ -5,6 +5,7 @@ let date = document.getElementById('date');
 let category = document.getElementById('category');
 let sale = document.querySelector('[name=sale]:checked');
 let add = document.getElementById('add');
+let update = document.getElementById('update');
 let table = [];
 var index , indexOfModify;
 
@@ -34,11 +35,6 @@ if (window.localStorage.table === undefined) {
 } else if (window.localStorage.table !== '') {
     table = JSON.parse(window.localStorage.table);
     tableCreating(table);
-    document.querySelectorAll('.delete').forEach(button=>{
-        button.addEventListener('click',event=>{
-            deleteFromTable();
-        })
-    })
 }
 
 function validation() {
@@ -100,7 +96,7 @@ function validation() {
     return key;
 }
 function tableCreating(arrayOfObjects) {
-    console.log(arrayOfObjects);
+    document.querySelector('#data').innerHTML=''
     arrayOfObjects.forEach(function (product) {
         let modifyBtn = document.createElement('button');
         modifyBtn.innerHTML = 'Modify';
@@ -126,25 +122,31 @@ function tableCreating(arrayOfObjects) {
         })
         row.appendChild(lastColumn);
         document.querySelector('#data').appendChild(row);
-        document.querySelectorAll('.modify').forEach(button=>{
-            button.addEventListener('click',e=>{
-                indexOfModify = Array.from(e.target.parentElement.parentElement.parentElement.children).indexOf(e.target.parentElement.parentElement)
-                name.value = e.target.parentElement.parentElement.children[0].innerHTML;
-                name.setAttribute('value',e.target.parentElement.parentElement.children[0].innerHTML)
-                brand.value = e.target.parentElement.parentElement.children[1].innerHTML;
-                brand.setAttribute('value',e.target.parentElement.parentElement.children[1].innerHTML)
-                price.value = parseFloat(e.target.parentElement.parentElement.children[2].innerHTML.replace(/,/g, ".")).toFixed(2)
-                price.setAttribute('value',parseFloat(e.target.parentElement.parentElement.children[2].innerHTML.replace(/,/g, ".")).toFixed(2))
-                date.value = e.target.parentElement.parentElement.children[3].innerHTML;
-                category.value = e.target.parentElement.parentElement.children[4].innerHTML;
-                if (e.target.parentElement.parentElement.children[5].innerHTML=== document.querySelector('#on-sale').value){
-                    document.querySelector('#on-sale').setAttribute('checked','');
-                }else  {
-                    document.querySelector('#not-on-sale').setAttribute('checked','');
-                }
-            })
+    })
+    document.querySelectorAll('.modify').forEach(button=>{
+        button.addEventListener('click',e=>{
+            indexOfModify = Array.from(e.target.parentElement.parentElement.parentElement.children).indexOf(e.target.parentElement.parentElement)
+            name.value = e.target.parentElement.parentElement.children[0].innerHTML;
+            name.setAttribute('value',e.target.parentElement.parentElement.children[0].innerHTML)
+            brand.value = e.target.parentElement.parentElement.children[1].innerHTML;
+            brand.setAttribute('value',e.target.parentElement.parentElement.children[1].innerHTML)
+            price.value = parseFloat(e.target.parentElement.parentElement.children[2].innerHTML.replace(/,/g, ".")).toFixed(2)
+            price.setAttribute('value',parseFloat(e.target.parentElement.parentElement.children[2].innerHTML.replace(/,/g, ".")).toFixed(2))
+            date.value = e.target.parentElement.parentElement.children[3].innerHTML;
+            category.value = e.target.parentElement.parentElement.children[4].innerHTML;
+            if (e.target.parentElement.parentElement.children[5].innerHTML=== document.querySelector('#on-sale').value){
+                document.querySelector('#on-sale').setAttribute('checked','');
+            }else  {
+                document.querySelector('#not-on-sale').setAttribute('checked','');
+            }
+            add.classList.remove('show');
+            update.classList.add('show');
         })
-
+    })
+    document.querySelectorAll('.delete').forEach(button=>{
+        button.addEventListener('click',event=>{
+            deleteFromTable();
+        })
     })
 }
 function formReset() {
@@ -157,23 +159,25 @@ function formReset() {
     price.classList.remove('valid');
     date.classList.remove('valid');
     category.classList.remove('valid');
-    document.querySelectorAll('[name=sale]').forEach(element=>{
+    document.querySelectorAll('.forRadio').forEach(element=>{
         element.classList.remove('valid');
+        element.removeAttribute('checked')
     })
+    console.log('reseted')
 }
 function deleteFromTable(){
-    index = Array.from(event.target.parentElement.parentElement.parentElement.children).indexOf(event.target.parentElement.parentElement);
-    document.querySelector('#modal-delete').addEventListener('click', deletButoon=>{
-        table.splice(index,1);
+    index = Array.from(document.querySelector('#data').children).indexOf(event.target.parentElement.parentElement);
+    console.log(index)
+    document.querySelector('#modal-delete').addEventListener('click', deleteButoon=>{
+        table.splice(index ,1);
         localStorage.table = JSON.stringify(table);
-        document.querySelector('#data').innerHTML=''
         tableCreating(table);
         document.querySelectorAll('.delete').forEach(button=>{
             button.addEventListener('click',event=>{
                 deleteFromTable();
             })
         })
-        deletButoon.target.parentElement.parentElement.close();
+        deleteButoon.target.parentElement.parentElement.close();
     })
     document.querySelector('#remove-modal').showModal()
 }
@@ -199,16 +203,10 @@ add.addEventListener('click', () => {
             return 0;
         });
         window.localStorage.table = JSON.stringify(table);
-        document.querySelector('#data').innerHTML=''
         tableCreating(table);
         document.querySelector('#details').innerHTML = productToAdd.details();
         document.querySelector('#add-modal').showModal()
         formReset()
-        document.querySelectorAll('.delete').forEach(button=>{
-            button.addEventListener('click',event=>{
-                deleteFromTable();
-            })
-        })
     } else {
 
     }
@@ -217,4 +215,18 @@ document.querySelectorAll('.cancel').forEach(button=>{
     button.addEventListener('click', e=>{
         e.target.parentElement.parentElement.close()
     })
+})
+update.addEventListener('click',()=>{
+    if (validation()===true) {
+        table[indexOfModify].name = name.value;
+        table[indexOfModify].brand = brand.value;
+        table[indexOfModify].price =  parseFloat(price.value.replace(/,/g, ".")).toFixed(2) + " DH";
+        table[indexOfModify].category = category.value;
+        table[indexOfModify].sale = document.querySelector('[name=sale]:checked').value;
+        window.localStorage.table = JSON.stringify(table);
+        tableCreating(table);
+        formReset();
+        update.classList.remove('show');
+        add.classList.add('show');
+    }
 })
