@@ -206,7 +206,7 @@ add.addEventListener('click', () => {
         table.push(productToAdd);
         window.localStorage.table = JSON.stringify(table);
         tableCreating(table);
-        formReset()
+        formReset();
         document.querySelector('form').reset();
         document.querySelector('#details').innerHTML = productToAdd.details();
         document.querySelector('#add-modal').showModal()
