@@ -8,6 +8,7 @@ let add = document.getElementById('add');
 let update = document.getElementById('update');
 let table = [];
 var index , indexOfModify;
+let inputs = document.querySelectorAll("input:not([type=radio],select)");
 
 class Product {
     constructor(name, brand, price, date, category, sale) {
@@ -97,6 +98,17 @@ function validation() {
 }
 function tableCreating(arrayOfObjects) {
     document.querySelector('#data').innerHTML=''
+    arrayOfObjects.sort(function(a, b) {
+        const nameA = a.name.toUpperCase();
+        const nameB = b.name.toUpperCase();
+        if (nameA < nameB) {
+            return -1;
+        }
+        if (nameA > nameB) {
+            return 1;
+        }
+        return 0;
+    });
     arrayOfObjects.forEach(function (product) {
         let modifyBtn = document.createElement('button');
         modifyBtn.innerHTML = 'Modify';
@@ -150,19 +162,20 @@ function tableCreating(arrayOfObjects) {
     })
 }
 function formReset() {
-    document.querySelector('form').reset()
-    name.value='';
-    price.value = '';
-    brand.value ='';
-    name.classList.remove('valid');
-    brand.classList.remove('valid');
-    price.classList.remove('valid');
+    inputs.forEach(e => {
+        e.value = '';
+        e.setAttribute('value', '')
+        e.classList.remove('valid')
+    })
     date.classList.remove('valid');
     category.classList.remove('valid');
     document.querySelectorAll('.forRadio').forEach(element=>{
         element.classList.remove('valid');
-        element.removeAttribute('checked')
     })
+    document.querySelectorAll('[name=sale]').forEach(ele=>{
+        ele.removeAttribute('checked');
+    })
+    document.querySelector('form').reset();
     console.log('reseted')
 }
 function deleteFromTable(){
@@ -191,22 +204,12 @@ add.addEventListener('click', () => {
         let saleValue = document.querySelector('[name=sale]:checked').value;
         let productToAdd = new Product(nameValue,brandValue,priceValue,dateValue,categoryValue,saleValue)
         table.push(productToAdd);
-        table.sort(function(a, b) {
-            const nameA = a.name.toUpperCase();
-            const nameB = b.name.toUpperCase();
-            if (nameA < nameB) {
-                return -1;
-            }
-            if (nameA > nameB) {
-                return 1;
-            }
-            return 0;
-        });
         window.localStorage.table = JSON.stringify(table);
         tableCreating(table);
+        formReset()
+        document.querySelector('form').reset();
         document.querySelector('#details').innerHTML = productToAdd.details();
         document.querySelector('#add-modal').showModal()
-        formReset()
     } else {
 
     }
@@ -224,9 +227,11 @@ update.addEventListener('click',()=>{
         table[indexOfModify].category = category.value;
         table[indexOfModify].sale = document.querySelector('[name=sale]:checked').value;
         window.localStorage.table = JSON.stringify(table);
+        table = JSON.parse(window.localStorage.table)
         tableCreating(table);
         formReset();
         update.classList.remove('show');
         add.classList.add('show');
+        tableCreating(table)
     }
 })
